@@ -17,14 +17,7 @@ unsigned char __fastcall__ call_mgtk(unsigned char code, void * params);
 #define MGTK_textbg_black       0x00
 #define MGTK_textbg_white       0x7F
 
-#define MGTK_DEFAULT_FONT          0x8800
-
-struct OpenWindow
-{
-  unsigned char x;
-  unsigned char y;
-  unsigned char z;
-};
+#define MGTK_DEFAULT_FONT     0x8800
 
 struct Point
 {

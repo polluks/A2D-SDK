@@ -27,7 +27,7 @@ clean:
 	rm -f out/*
 	rm -f a2d.po
 
-a2d.po: out/foo.da out/main
+a2d.po: out/foo.da
 	rm -f $@
 	java -jar ${AC} -pro140 $@ a2d
 	java -jar ${AC} -p $@ foo '$$f1' '0x8641' < out/foo.da

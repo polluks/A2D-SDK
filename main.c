@@ -5,12 +5,10 @@
 
 void main_da()
 {
-  char title[] = " Title";
+  const char title[] = "\x05Title";
   unsigned char a;
   struct Command38 param = {};
   memset(&param, 0, sizeof(param));
-
-  title[0] = 5;
 
   // copied from calculator.s
 
