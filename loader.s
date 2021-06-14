@@ -5,9 +5,10 @@
 	.include "common.inc"
 	.include "desktop/desktop.inc"
 
+        .importzp sp
 	.import _main_da
         .export _call_mgtk
-	.import __MAIN_START__, __MAIN_LAST__
+	.import __MAIN_START__, __MAIN_LAST__, __HIMEM__
 
 	.segment "LOADER"
 
@@ -25,6 +26,13 @@ save_stack:  .byte   0
 	.proc copy2aux
 	tsx
 	stx     save_stack
+
+        lda     #<__HIMEM__
+        ldx     #>__HIMEM__
+
+        ; Set up the C stack.
+        sta     sp
+        stx     sp + 1
 
 	;; Copy the DA to AUX memory.
 	copy16  #__MAIN_START__, STARTLO
@@ -57,7 +65,9 @@ save_stack:  .byte   0
 	.proc _call_mgtk
         sta low
         stx high
-        ;; TODO: store code too
+        ldy #0
+        lda (sp), y
+        sta code
         jsr $4000
 code:   .byte $00
 low:    .byte $01
